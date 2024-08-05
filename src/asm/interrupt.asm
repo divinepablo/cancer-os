@@ -1,8 +1,4 @@
-.target "65C02"
-
-BRK_REASON = $12
 .include "syscall.asm"
-
 non_maskable_interrupt_handler:
     rti
 

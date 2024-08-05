@@ -1,11 +1,8 @@
-.target "65C02"
-
 TTY = $4000
-TEST_OUT = $10 ; random address in zero page
 
-
+.export _c_print
 .code
-.macro print(str)
+.macro print str
     pha
     lda #<str
     sta TEST_OUT
@@ -14,6 +11,11 @@ TEST_OUT = $10 ; random address in zero page
     jsr _print
     pla
 .endmacro
+
+_c_print:
+    sta TEST_OUT
+    stx TEST_OUT+1
+    jsr _print
 
 print_char: ; print content of A to screen
     sta TTY
