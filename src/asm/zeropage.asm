@@ -1,7 +1,14 @@
+.include "zeropage.inc"
 .zeropage
 
-TEST_OUT:
+test_out:
     .res 2
 
-BRK_REASON:
+brk_reason:
+    .res 2
+
+heap_ptr:
+    .res 2
+
+heap_ptr2:
     .res 2

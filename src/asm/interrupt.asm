@@ -8,15 +8,15 @@ software:
     phy
     inx ; get return address
     lda $100, x
-    sta BRK_REASON
+    sta brk_reason
     inx
     lda $100, x
-    sta BRK_REASON + 1
-    dec BRK_REASON
+    sta brk_reason + 1
+    dec brk_reason
     
 @handle:
     sty $0
-    lda (BRK_REASON), y
+    lda (brk_reason), y
     sta $200
     ply
     jsr _syscall

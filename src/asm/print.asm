@@ -5,16 +5,16 @@ TTY = $4000
 .macro print str
     pha
     lda #<str
-    sta TEST_OUT
+    sta test_out
     lda #>str
-    sta TEST_OUT+1
+    sta test_out+1
     jsr _print
     pla
 .endmacro
 
 _c_print:
-    sta TEST_OUT
-    stx TEST_OUT+1
+    sta test_out
+    stx test_out+1
     jsr _print
 
 print_char: ; print content of A to screen
@@ -30,7 +30,7 @@ _print_1:
     iny
     
 _print_2:
-    lda (TEST_OUT), y
+    lda (test_out), y
     bne _print_1
     ply
     rts

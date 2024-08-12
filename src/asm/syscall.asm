@@ -5,7 +5,7 @@
 .endmacro
 
 _syscall_1:
-    rts
+    jsr alloc
 
 _syscall: ; A is syscall index
     cmp #1
