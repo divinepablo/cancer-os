@@ -1,16 +1,7 @@
-TTY = $4000
-
+.include "print.inc"
+.include "zeropage.inc"
+.import TTY
 .export _c_print
-.code
-.macro print str
-    pha
-    lda #<str
-    sta test_out
-    lda #>str
-    sta test_out+1
-    jsr _print
-    pla
-.endmacro
 
 _c_print:
     sta test_out
@@ -24,16 +15,13 @@ print_char: ; print content of A to screen
 _print:
     phy
     ldy #0
-    beq _print_2
-_print_1:
+    beq @2
+@1:
     jsr print_char
     iny
     
-_print_2:
+@2:
     lda (test_out), y
-    bne _print_1
+    bne @1
     ply
     rts
-
-
-

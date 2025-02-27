@@ -1,12 +1,10 @@
-.setcpu "65C02"
-
-.include "zeropage.asm"
-.include "print.asm"
-.include "interrupt.asm"
-.include "allocator.asm"
 .import _main
 .export   __STARTUP__ : absolute = 1        ; Mark as startup
 .debuginfo
+.include "print.inc"
+.include "vectors.inc"
+.include "zeropage.inc"
+.include "alloc.inc"
 
 .code
 start:
@@ -30,6 +28,6 @@ _loop:
 test: .byte "init heap", $0a, $00
 
 .segment "VECTORS"
-.word non_maskable_interrupt_handler
-.word start
-.word interrupt_handler
+.word non_maskable_interrupt_handler  ; NMI vector ($FFFA-$FFFB)
+.word start                           ; RESET vector ($FFFC-$FFFD)
+.word interrupt_handler               ; IRQ/BRK vector ($FFFE-$FFFF)

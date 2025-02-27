@@ -1,5 +1,5 @@
 #include "print.h"
-void print(const char* string) {
+void puts(const char* string) {
     while (*string != 0)
     {
         // Write to the screen

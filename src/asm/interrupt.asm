@@ -1,4 +1,6 @@
-.include "syscall.asm"
+.include "vectors.inc"
+.include "zeropage.inc"
+
 non_maskable_interrupt_handler:
     rti
 
@@ -19,7 +21,7 @@ software:
     lda (brk_reason), y
     sta $200
     ply
-    jsr _syscall
+    ; jsr _syscall
     bra interrupt_exit
     
 interrupt_handler: ; check if interrupt is from BRK instruction http://www.6502.org/tutorials/65c02opcodes.html#6

@@ -1,3 +1,5 @@
+.include "zeropage.inc"
+.include "alloc.inc"
 
 .struct HeapBlock
     size .word
