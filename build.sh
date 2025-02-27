@@ -7,3 +7,4 @@ cd build
 
 cmake -G "Unix Makefiles" -DCMAKE_TOOLCHAIN_FILE=../toolchain/cc65-toolchain.cmake ..
 make
+xxd -p os.bin > os.hex

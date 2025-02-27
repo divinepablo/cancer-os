@@ -35,21 +35,9 @@ void* alloc(unsigned int size)
     struct heap_block* prev = 0;
     void* ptr = heap->first;
 
-    // next ptr points to next free not the next block
-    // while (size > block->size)
-    // {
-    //     block = block->next;
-    // }
-
-    // if (!block)
-    // {
-    //     return (void*)-1;
-    // }
-
-    // *(int*)DEBUG_ADDRESS = (unsigned int)block;
-    // *(int*)(DEBUG_ADDRESS + 2) = (unsigned int)&block;
     DEBUG(int, (unsigned int)ptr, 0);
     DEBUG(int, block->size, 2);
+    DEBUG(int, size, 4);
 
     return (void*)block;
 }
@@ -68,16 +56,7 @@ void free(void* ptr)
 
 
 
-void main()
-{
-    // int a = 0x15;
-    // void* ptr;
-    // struct heap_info heap_info;
-    // *heap = heap_info;
-    // init_heap();
-    // ptr = alloc(0x100);
-    // DEBUG(int, (unsigned int)heap, 4);
-    // DEBUG(int, (unsigned int)&heap, 0x10);
-    // DEBUG(int, (unsigned int)heap->first, 0x12);
-    while (1);
-}
+// void main()
+// {
+
+// }
