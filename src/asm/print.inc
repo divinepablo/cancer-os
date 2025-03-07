@@ -1,6 +1,6 @@
 .if .not .defined(PRINT_INCLUDED)
 PRINT_INCLUDED = 1
-.global _c_print, _print
+.global _c_print, _print, print_char
 .code
 
 .macro print str

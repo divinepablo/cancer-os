@@ -5,6 +5,8 @@
 .include "vectors.inc"
 .include "zeropage.inc"
 .include "alloc.inc"
+.include "string.inc"
+.include "storage.inc"
 
 .code
 start:
@@ -18,6 +20,20 @@ start:
 
     ldy #$10
     jsr alloc
+
+    lda #$ff
+    jsr number_to_string
+
+    tya
+    jsr print_char
+    txa
+    jsr print_char
+
+    ldx #0
+    ldy #0
+    lda #$ff
+    jsr write_byte
+    ; print RESULT
 _loop:
     bra _loop
 
