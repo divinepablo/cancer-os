@@ -16,10 +16,10 @@ start:
 
     print test
 
-    jsr init_heap
+    jsr create_pages
 
-    ldy #$10
-    jsr alloc
+    ; ldy #$10
+    ; jsr alloc
 
     lda #$ff
     jsr number_to_string

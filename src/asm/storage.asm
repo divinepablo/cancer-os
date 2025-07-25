@@ -7,6 +7,6 @@
 ; Writes a byte to the storage RAM
 write_byte:
     stx FP_REGISTERA
-    sty FP_REGISTERA+1
-    sta FP_REGISTERA+2
+    sty FP_REGISTERB+1
+    sta STORAGE_IO_PORT+2
     rts

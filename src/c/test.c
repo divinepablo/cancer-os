@@ -1,62 +1,30 @@
 #include "test.h"
 #include "print.h"
-#include <string.h> // test
-
-#define HEAP_START 0x2000
-#define HEAP_SIZE 0x1000
-
-struct heap_block {
-    struct heap_block* next;
-    unsigned int size;
-    char used;
+struct _memory_page {
+    char pad[256];
 };
 
-struct heap_info {
-    struct heap_block* first;
-};
-
-struct heap_info* heap = (struct heap_info*)0x202;
-
-#define DEBUG_ADDRESS 0x1000
-#define DEBUG(type, value, offset) *(type*)(DEBUG_ADDRESS + offset) = value
-
-void init_heap()
+typedef struct _memory_page memory_page;
+unsigned char buffer[3];
+unsigned char init_pages()
 {
-    c_print("init heap\n");
-    heap->first = (struct heap_block*)HEAP_START;
-    heap->first->next = 0;
-    heap->first->size = HEAP_SIZE - sizeof(struct heap_block);
-    heap->first->used = 0;
-}
-
-void* alloc(unsigned int size)
-{
-    struct heap_block* block = heap->first;
-    struct heap_block* prev = 0;
-    void* ptr = heap->first;
-
-    DEBUG(int, (unsigned int)ptr, 0);
-    DEBUG(int, block->size, 2);
-    DEBUG(int, size, 4);
-
-    return (void*)block;
-}
-
-void free(void* ptr)
-{
-    struct heap_block* block = (struct heap_block*)((char*)ptr - sizeof(struct heap_block));
-    block->used = 0;
-
-    while (block->next && !block->next->used)
+    unsigned char _ = c_print("page\n");
+    int page_iterator = PAGE_START;
+    unsigned char pages = 0;
+    
+    buffer[2] = 0;
+    for (; page_iterator < PAGE_END; page_iterator += PAGE_SIZE) 
     {
-        block->size += block->next->size + sizeof(struct heap_block);
-        block->next = block->next->next;
+        memory_page *page = (memory_page *)page_iterator;
+        unsigned char i = 0;
+        page->pad[i] = 0xFF;
+        
+        c_print("Initialized page ");
+        buffer[0] = HEX[pages >> 4];
+        buffer[1] = HEX[pages & 0xF];
+        c_print(buffer);
+        c_print("\n");
+        pages++;
     }
+    return pages;
 }
-
-
-
-// void main()
-// {
-
-// }
